@@ -147,7 +147,7 @@ collatz.c нь start параметрийг авч linked list үүсгэнэ. A
 ## 6. Туршилт ба UI дүрслэл
 
 ### 6.1 UI-ийн бүтэц
-Зүүн талын control panel нь RGB, ID, start оролт болон командын товчтой. Баруун талд HEAD ба node-ууд, ногоон next, цэнхэр prev холбоос, хайлтын шар хүрээ, snapshot хүснэгт харагдана. Graph-ийн node/edge нь snapshot-ийн logical ID-тай таарна.
+Зүүн талын control panel нь сонгосон бүтцэд тохирсон удирдлагыг харуулна. Part I сонгосон үед RGB, ID болон өнгийн командууд харагдах бөгөөд Part II сонгосон үед Part I-ийн RGB оруулах, Нэмэх, Хайх, Устгах, Reset, Clear удирдлагууд нууж, зөвхөн Collatz эхлэх утга ба үүсгэх удирдлага үлдэнэ. Баруун талд HEAD ба node-ууд, ногоон next, цэнхэр prev холбоос, хайлтын шар хүрээ, snapshot хүснэгт харагдана. Олон node-той графыг мөр хооронд могой хэлбэрийн дарааллаар байрлуулж, холбоосын хөндлөн огтлолцлыг багасгасан. Баганын тоо графын харагдах өргөнд таардаг.
 
 ![Анхны дөрвөн өнгийн жагсаалт ба UI бүтэц](screenshots/Screenshot_from_2026-11-02_01-59-32.png)
 
@@ -158,7 +158,7 @@ collatz.c нь start параметрийг авч linked list үүсгэнэ. A
 Үйлдлийн түүх нь тухайн browser session-ийн амжилттай команд, timestamp, snapshot-ийг хадгална. JSON файл татах нь төлөв болон history-г татна. Энэ нь kernel log-ийг орлохгүй; dmesg нотолгоог тусад нь хадгална.
 ### 6.3 Practice simulation ба Live mode
 
-Practice simulation нь Windows/Linux/macOS дээр kernel module-гүй ажиллана. Live mode нь module байхгүй үед алдааг харуулж, practice руу нууцаар шилжихгүй. Practice screenshot-ийг live kernel screenshot гэж тайлагнах ёсгүй.
+Practice simulation нь Windows/Linux/macOS дээр kernel module-гүй ажиллана. Live mode нь module байхгүй үед алдааг харуулж, practice руу нууцаар шилжихгүй. Practice screenshot-ийг live kernel screenshot гэж тайлагнах ёсгүй. Screenshot-уудыг эцсийн PDF-д оруулахдаа одоогийн Монгол UI-аас дахин авч, Элемент № гэсэн нэршил, өнгөт swatch болон шинэ layout-ийг харуулна; өмнөх англи Node # шошготой зургуудыг ашиглахгүй.
 
 ## 7. Туршилтын арга
 
@@ -187,6 +187,8 @@ Kernel acceptance нь edge бүрийн next.prev болон prev.next invarian
 
 ## 8. Бодит үр дүн ба нотолгоо
 
+**Шүүмжийн дагуу нотолгооны төлөв:** Practice mode-ийн тестүүд нь kernel runtime-ийн оронд тооцогдохгүй. Бодит insmod/rmmod, /proc болон dmesg нотолгоог зөвхөн Ubuntu VM дээр ажиллуулж авна; энэ баримтжуулалтад зохиомол screenshot эсвэл log нэмээгүй.
+
 ### 8.1 Локал автомат шалгалт
 2026-11-01-нд local automation ажиллуулсан. Raw log: [local-tests.txt](evidence/local-tests.txt). ASAN_OPTIONS=detect_leaks=0 тохируулсан нь энэ container-ийн LeakSanitizer process inspection хязгаарлалтаас шалтгаалсан.
 
@@ -212,7 +214,7 @@ Kernel acceptance нь edge бүрийн next.prev болон prev.next invarian
 Kernel implementation ба practice model-ийн ижил үр дүн нь бүх kernel-specific алдааг үгүйсгэхгүй. Allocation failure, kernel locking, module removal, ABI compatibility нь live орчинд шалгах асуудал хэвээр. Kernel headers дээр compile амжилттай байх нь ажиллаж буй kernel дээр load амжилттайг батлахгүй.
 ### 9.2 Хязгаарлалт
 
-UI нь kernel pointer address биш logical topology-г харуулдаг. Их хэмжээний Collatz list дээр SVG өндөр болно; scroll болон snapshot хүснэгтээр шалгана. Production authentication, remote hosting, олон browser-ийн тусгаарласан session state энэ төслийн хамрах хүрээнд ороогүй.
+UI нь kernel pointer address биш logical topology-г харуулдаг. Их хэмжээний Collatz list дээр граф босоо чиглэлд уртасна; scroll болон snapshot хүснэгтээр шалгана. Browser-ийн өргөн багасахад баганын тоо автоматаар цөөрнө. Production authentication, remote hosting, олон browser-ийн тусгаарласан session state энэ төслийн хамрах хүрээнд ороогүй.
 
 ## 10. Дүгнэлт
 
