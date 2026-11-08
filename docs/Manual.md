@@ -62,7 +62,7 @@ Browser дээр http://127.0.0.1:8765 нээнэ. Local server-ийг Ctrl+C д
 
 ### 1.1.4 Оролт ба тохиргоо
 
-Structure сонголтоос Part I Color list эсвэл Part II Collatz list сонгоно. Graph нь node-ийн logical ID, value, prev/next утгыг харуулна. Inspector хүснэгтээр холбоосыг давхар шалгана.
+Structure сонголтоос Part I Color list эсвэл Part II Collatz list сонгоно. Part I сонгосон үед RGB оруулах, Нэмэх, RGB утгаар хайх, ID-аар Устгах, Анхны 4 элементийг сэргээх, Хоослох удирдлага харагдана. Part II сонгосон үед эдгээр Part I удирдлага нууж, зөвхөн Коллатцын эхлэх утга болон Дадлагын дараалал үүсгэх удирдлага харагдана. Graph нь node-ийн logical ID, value, prev/next утгыг харуулна. Inspector хүснэгтээр холбоосыг давхар шалгана. Олон node-той граф мөр хооронд могой хэлбэрийн дарааллаар байрлаж, next/prev холбоосын огтлолцлыг багасгана.
 
 ### 1.1.5 Ажиллуулах, зогсоох, reset хийх
 
@@ -112,6 +112,8 @@ start=1 → 1 node. start=25 → 24 nodes. start=27 → 112 nodes. start=0 бо�
 
 ### 1.1.8 Түгээмэл алдаа ба шийдэл
 
+UI-ийн Монгол товчны нэршил нь src/ui/index.html-д байгаа нэршилтэй таарна. Тайлангийн screenshot авахдаа ижил Монгол интерфейсийг шинээр нээж, өмнөх англи шошготой зураг ашиглахгүй.
+
 | Шинж | Шалтгаан / шийдэл |
 | --- | --- |
 | /lib/modules/.../build missing | Running kernel-тэй тохирох headers суулга |
@@ -125,7 +127,7 @@ start=1 → 1 node. start=25 → 24 nodes. start=27 → 112 nodes. start=0 бо�
 | Node not found | Одоогийн inspector-оос ID шалга |
 | Багтаамж reached | 128 limit; delete/clear хий |
 | Address already in use | --port 8766; шинэ URL-ийг ашигла |
-| Invalid Host / 403 | localhost биш 127.0.0.1 URL; page reload |
+| 403 / Хүсэлт зөвшөөрөгдсөнгүй | Сервер дахин ассан эсвэл token хүчингүй болсон бол хуудсыг дахин ачаална уу (Ctrl+R); сервер ажиллаж байгаа эсэхийг шалга |
 
 ## 1.2 Operational заавар
 
