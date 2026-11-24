@@ -8,7 +8,7 @@
 **Баг:** II-4-4  
 **Сэдэв:** Kernel Data Structures  
 **Багш:** Г. Ганбат /F.CS10/  
-**Огноо:** 2026-11-01
+**Огноо:** 2026-11-23 (Бие даалт 2 · Final, `v2.0-final`)
 
 | Гишүүн | Оюутны код |
 | --- | --- |
@@ -62,7 +62,7 @@ Browser дээр http://127.0.0.1:8765 нээнэ. Local server-ийг Ctrl+C д
 
 ### 1.1.4 Оролт ба тохиргоо
 
-Structure сонголтоос Part I Color list эсвэл Part II Collatz list сонгоно. Part I сонгосон үед RGB оруулах, Нэмэх, RGB утгаар хайх, ID-аар Устгах, Анхны 4 элементийг сэргээх, Хоослох удирдлага харагдана. Part II сонгосон үед эдгээр Part I удирдлага нууж, зөвхөн Коллатцын эхлэх утга болон Дадлагын дараалал үүсгэх удирдлага харагдана. Graph нь node-ийн logical ID, value, prev/next утгыг харуулна. Inspector хүснэгтээр холбоосыг давхар шалгана. Олон node-той граф мөр хооронд могой хэлбэрийн дарааллаар байрлаж, next/prev холбоосын огтлолцлыг багасгана.
+Structure сонголтоос Part I Color list эсвэл Part II Collatz list сонгоно. Part I сонгосон үед RGB оруулах, Нэмэх, RGB утгаар хайх, ID-аар Устгах, Анхны 4 элементийг сэргээх, Хоослох удирдлага харагдана. Part II сонгосон үед эдгээр Part I удирдлага нууж, зөвхөн Коллатцын эхлэх утга болон Дадлагын дараалал үүсгэх удирдлага харагдана. Graph нь node-ийн logical ID, value, prev/next утгыг харуулна. Inspector хүснэгтээр холбоосыг давхар шалгана. Олон node-той граф мөр хооронд могой хэлбэрийн дарааллаар байрлаж, next/prev холбоосын огтлолцлыг багасгана. Баганын тоо графын өргөнд тохирч 1–8 хооронд автоматаар өөрчлөгдөх бөгөөд граф төвд байрлана; өндөр нь 520 px хүртэл, түүнээс урт бол графын доторх scroll ашиглана. Серверийг дахин асаасны дараа нээлттэй байсан хуудас дээр үйлдэл хийвэл «Хүсэлт зөвшөөрөгдсөнгүй … Хуудсыг дахин ачаална уу (Ctrl+R)» гэсэн мэдээлэл гарна.
 
 ### 1.1.5 Ажиллуулах, зогсоох, reset хийх
 
@@ -197,7 +197,17 @@ Log-д removed N nodes; list empty=1 гарна. /proc/kds_colors болон /pr
 ```bash
 make test
 ```
-Python tests нь input validation, model invariant, Collatz, HTTP token/origin/host шалгалтуудыг гүйцэтгэнэ. C test нь module-ийн shared arithmetic header-ийг GCC + ASan/UBSan-тай compile хийж шалгана. LeakSanitizer нь container/ptrace орчинд ажиллахгүй бол зөвхөн тэр орчинд ASAN_OPTIONS=detect_leaks=0 make test ажиллуулна.
+Python tests нь input validation, model invariant, Collatz, HTTP token/origin/host шалгалтуудыг гүйцэтгэнэ. C test нь module-ийн shared arithmetic header-ийг GCC + ASan/UBSan-тай compile хийж шалгана. LeakSanitizer нь container/ptrace орчинд ажиллахгүй бол зөвхөн тэр орчинд ASAN_OPTIONS=detect_leaks=0 make test ажиллуулна. Одоо 27 Python тест (шүүмжлэгчийн A1–A10 хүснэгт, захын утга, 403 тохиолдлыг дахин ажиллуулдаг `tests/test_review_regression.py` орно) ба C тест ажиллана.
+
+UI-ийн логик (Node.js шаардлагатай):
+```bash
+make test-ui
+```
+Бодит browser дээрх layout шалгалт (Part II дээр Part I удирдлага нуугдах, 112 node-ийн холбоосын огтлолцол, 700 px өргөнд хөндлөн scroll үгүй, 1920 px дээр граф талбайг ашиглах, 403 санамж):
+```bash
+npm i playwright-core
+CHROME_PATH=/usr/bin/chromium make test-browser
+```
 
 ### 1.2.6 Нэмэлт boundary/error test
 
@@ -217,11 +227,15 @@ Script нь одоо ачаалагдсан модуль байвал state-ий
 - Collatz start=15, node count 18 ба inspector.
 - dmesg-ийн load traversal ба unload cleanup.
 - uname -a, GCC/Python version, make kernel output.
+Live нотолгоог нэг командаар цуглуулж болно (Ubuntu VM, repository root):
+```bash
+make evidence    # = bash tools/collect_kernel_evidence.sh -> docs/evidence/live/
+```
 Live туршилтын нотолгоог `docs/evidence/` дотор хадгалж, [Report.md](Report.md)-д тайлбартай нэмнэ. Одоогийн practice зургууд [screenshots/](screenshots/) хавтаст байна. Practice screenshot-ийг live гэж нэрлэхгүй.
 
 ### 1.2.8 Known issues
 
-Ubuntu 6.8.0-138-generic headers дээр хоёр module compile/link амжилттай (W=1). Kernel load болон live screenshot энэ багцыг бэлтгэсэн container-д баталгаажаагүй. Target VM дээр tests/kernel_acceptance.py болон UI checklist-ийг заавал ажиллуулна. Browser visual test мөн бэлтгэлийн орчинд browser binary татагдаагүй учраас шалгахаар хүлээгдэж буй.
+Ubuntu 6.8.0-138-generic headers дээр хоёр module compile/link амжилттай (W=1). **Бодит kernel load/unload (insmod/rmmod), live screenshot болон dmesg нотолгоо одоогоор цуглуулаагүй** (peer review-ийн Major #1); Ubuntu VM дээр `make evidence` болон UI checklist-ийг заавал ажиллуулна. Browser дээрх layout шалгалтыг headless Chromium-оор practice горимд хийж баталгаажуулсан (`docs/evidence/final-tests.txt`).
 Module reload нь state-ийг шинээр үүсгэнэ. Persistent database байхгүй. Том sequence дээр graph scroll урт болно. Simultaneous browser/terminal өөрчлөлтөд Шинэчлэх шаардлагатай. Local server-ийг internet-д expose хийхээр зохиогоогүй.
 
 #### Үйлдлийн түүхийн хязгаар
