@@ -1,0 +1,57 @@
+# BD2 final regression run — 2026-11-23T19:53:45+00:00
+# base commit 864e51e + BD2 working-tree changes
+Linux 6.18.44-fc-v726 x86_64
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Python 3.12.3
+v22.23.5
+
+## make test (Python unittest + C ASan/UBSan; ASAN_OPTIONS=detect_leaks=0 because LeakSanitizer is blocked in this container)
+python3 -m unittest discover -s tests -v
+test_add_search_delete (test_backend.BackendTests.test_add_search_delete) ... ok
+test_bad_rgb (test_backend.BackendTests.test_bad_rgb) ... ok
+test_capacity (test_backend.BackendTests.test_capacity) ... ok
+test_clear_reset (test_backend.BackendTests.test_clear_reset) ... ok
+test_collatz_15 (test_backend.BackendTests.test_collatz_15) ... ok
+test_collatz_25 (test_backend.BackendTests.test_collatz_25) ... ok
+test_collatz_27 (test_backend.BackendTests.test_collatz_27) ... ok
+test_collatz_one (test_backend.BackendTests.test_collatz_one) ... ok
+test_delete_first_middle_last (test_backend.BackendTests.test_delete_first_middle_last) ... ok
+test_duplicate_first_match (test_backend.BackendTests.test_duplicate_first_match) ... ok
+test_failed_generation_preserves_state (test_backend.BackendTests.test_failed_generation_preserves_state) ... ok
+test_initial_four (test_backend.BackendTests.test_initial_four) ... ok
+test_invalid_collatz (test_backend.BackendTests.test_invalid_collatz) ... ok
+test_missing_delete (test_backend.BackendTests.test_missing_delete) ... ok
+test_search_miss (test_backend.BackendTests.test_search_miss) ... ok
+test_authenticated_command (test_http.HTTPTests.test_authenticated_command) ... ok
+test_bad_host (test_http.HTTPTests.test_bad_host) ... ok
+test_foreign_origin (test_http.HTTPTests.test_foreign_origin) ... ok
+test_invalid_input (test_http.HTTPTests.test_invalid_input) ... ok
+test_missing_token (test_http.HTTPTests.test_missing_token) ... ok
+test_state (test_http.HTTPTests.test_state) ... ok
+test_unknown_route (test_http.HTTPTests.test_unknown_route) ... ok
+ДАДЛАГЫН ЗАГВАРЧЛАЛ — цөмийн бодит туршилтын нотолгоо биш
+http://127.0.0.1:8791 хаягийг нээнэ үү (зогсоох: Ctrl+C)
+test_403_cases (test_review_regression.ReviewRegression.test_403_cases) ... 127.0.0.1 - - [23/Nov/2026 19:53:45] "POST /api/command HTTP/1.1" 403 -
+ok
+test_A1_to_A6_colors (test_review_regression.ReviewRegression.test_A1_to_A6_colors) ... 127.0.0.1 - - [23/Nov/2026 19:53:45] "POST /api/command HTTP/1.1" 200 -
+ok
+test_A7_to_A10_collatz (test_review_regression.ReviewRegression.test_A7_to_A10_collatz) ... 127.0.0.1 - - [23/Nov/2026 19:53:45] "POST /api/command HTTP/1.1" 200 -
+ok
+test_boundaries (test_review_regression.ReviewRegression.test_boundaries) ... 127.0.0.1 - - [23/Nov/2026 19:53:45] "POST /api/command HTTP/1.1" 200 -
+ok
+test_ui_contains_review_fixes (test_review_regression.ReviewRegression.test_ui_contains_review_fixes) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.204s
+
+OK
+mkdir -p build
+cc -std=c11 -Wall -Wextra -Werror -fsanitize=address,undefined tests/test_math.c -o build/test_math
+./build/test_math
+PASS: shared kernel arithmetic, exact 15 sequence, zero and overflow guards
+
+## make test-ui
+PASS: rendering, mode-specific controls, non-mutating presets, graph selection, poll concurrency, error history and 403 reload guidance
+
+## make test-browser (headless Chromium)
+PASS: Part II hides Part I controls; 8 crossing pairs (<=20) at 112 nodes; internal scroll; no h-scroll at 700px; graph fill 84% at 1920px; 403 shows reload hint

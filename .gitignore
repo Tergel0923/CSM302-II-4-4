@@ -7,3 +7,4 @@ build/
 *.cmd
 Module.symvers
 modules.order
+node_modules/

@@ -1,0 +1,65 @@
+{
+  "before": {
+    "partI_controls_visible_in_partII": 9,
+    "partII_controls_visible_in_partII": 2,
+    "collatz27": {
+      "nodesShown": "112",
+      "edges": 226,
+      "crossingPairs": 260,
+      "docHeight": 3961,
+      "graphClientH": 3155,
+      "graphScrollH": 3155
+    },
+    "w1920": {
+      "mainWidth": 1536,
+      "graphClientW": 1170,
+      "sideMargin": 192,
+      "svgW": 825,
+      "usedPct": 80
+    },
+    "w700": {
+      "graphClientW": 825,
+      "graphScrollW": 825,
+      "pageHScroll": true,
+      "hOverflow": false
+    },
+    "stale_token_message": "Хүсэлт зөвшөөрөгдсөнгүй",
+    "stale_token_mentions_reload": false
+  },
+  "after": {
+    "partI_controls_visible_in_partII": 0,
+    "partII_controls_visible_in_partII": 2,
+    "collatz27": {
+      "nodesShown": "112",
+      "edges": 226,
+      "crossingPairs": 8,
+      "docHeight": 1349,
+      "graphClientH": 520,
+      "graphScrollH": 2302
+    },
+    "collatz15": {
+      "edges": 38,
+      "crossingPairs": 3
+    },
+    "w1920": {
+      "mainWidth": 1844,
+      "graphClientW": 1463,
+      "sideMargin": 38,
+      "svgW": 1240,
+      "usedPct": 96
+    },
+    "w700": {
+      "graphClientW": 607,
+      "graphScrollW": 607,
+      "pageHScroll": false,
+      "hOverflow": false
+    },
+    "stale_token_message": "Хүсэлт зөвшөөрөгдсөнгүй Сервер дахин ассан эсвэл session token хүчингүй болсон байж болно. Хуудсыг дахин ачаална уу (Ctrl+R).",
+    "stale_token_mentions_reload": true,
+    "add_search": {
+      "count": "5",
+      "match": "5"
+    },
+    "invalid_rgb_message": "Утга 0–255 завсарт байх ёстой."
+  }
+}
