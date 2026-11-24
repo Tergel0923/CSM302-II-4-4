@@ -147,7 +147,7 @@ collatz.c нь start параметрийг авч linked list үүсгэнэ. A
 ## 6. Туршилт ба UI дүрслэл
 
 ### 6.1 UI-ийн бүтэц
-Зүүн талын control panel нь сонгосон бүтцэд тохирсон удирдлагыг харуулна. Part I сонгосон үед RGB, ID болон өнгийн командууд харагдах бөгөөд Part II сонгосон үед Part I-ийн RGB оруулах, Нэмэх, Хайх, Устгах, Reset, Clear удирдлагууд нууж, зөвхөн Collatz эхлэх утга ба үүсгэх удирдлага үлдэнэ. Баруун талд HEAD ба node-ууд, ногоон next, цэнхэр prev холбоос, хайлтын шар хүрээ, snapshot хүснэгт харагдана. Олон node-той графыг мөр хооронд могой хэлбэрийн дарааллаар байрлуулж, холбоосын хөндлөн огтлолцлыг багасгасан. Баганын тоо графын харагдах өргөнд таардаг.
+Зүүн талын control panel нь сонгосон бүтцэд тохирсон удирдлагыг харуулна. Part I сонгосон үед RGB, ID болон өнгийн командууд харагдах бөгөөд Part II сонгосон үед Part I-ийн RGB оруулах, Нэмэх, Хайх, Устгах, Reset, Clear удирдлагууд нууж, зөвхөн Collatz эхлэх утга ба үүсгэх удирдлага үлдэнэ. Баруун талд HEAD ба node-ууд, ногоон next, цэнхэр prev холбоос, хайлтын шар хүрээ, snapshot хүснэгт харагдана. Олон node-той графыг 4 хүртэлх баганатай могой хэлбэрийн дарааллаар байрлуулна. Node-ийн карт, үсэг болон next/prev сумны зайг томруулж, холбоос бүрийг картын ирмэгээс эхлүүлэн зурна. Граф босоо чиглэлд scroll хийнэ; дэлгэцийн өргөн багасахад үндсэн layout нэг багана болж шилжинэ.
 
 ![Анхны дөрвөн өнгийн жагсаалт ба UI бүтэц](screenshots/Screenshot_from_2026-11-02_01-59-32.png)
 
@@ -214,7 +214,7 @@ Kernel acceptance нь edge бүрийн next.prev болон prev.next invarian
 Kernel implementation ба practice model-ийн ижил үр дүн нь бүх kernel-specific алдааг үгүйсгэхгүй. Allocation failure, kernel locking, module removal, ABI compatibility нь live орчинд шалгах асуудал хэвээр. Kernel headers дээр compile амжилттай байх нь ажиллаж буй kernel дээр load амжилттайг батлахгүй.
 ### 9.2 Хязгаарлалт
 
-UI нь kernel pointer address биш logical topology-г харуулдаг. Их хэмжээний Collatz list дээр граф босоо чиглэлд уртасна; scroll болон snapshot хүснэгтээр шалгана. Browser-ийн өргөн багасахад баганын тоо автоматаар цөөрнө. Production authentication, remote hosting, олон browser-ийн тусгаарласан session state энэ төслийн хамрах хүрээнд ороогүй.
+UI нь kernel pointer address биш logical topology-г харуулдаг. Их хэмжээний Collatz list дээр граф босоо чиглэлд уртасна; scroll болон snapshot хүснэгтээр шалгана. Node-ийн карт болон бичвэр томорсон; графын viewport өндөр нэмэгдэж, browser-ийн өргөн багасахад үндсэн layout нэг багана болж шилжинэ. Production authentication, remote hosting, олон browser-ийн тусгаарласан session state энэ төслийн хамрах хүрээнд ороогүй.
 
 ## 10. Дүгнэлт
 
