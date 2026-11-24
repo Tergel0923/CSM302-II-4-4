@@ -17,10 +17,10 @@ async function request(data){
  const controls=['add','search','delete','reset','clear','generate','refresh'];controls.forEach(id=>$(id).disabled=true);
  try{
   const res=await fetch(data?'/api/command':'/api/state',data?{method:'POST',headers:{'Content-Type':'application/json','X-KDS-Token':token},body:JSON.stringify(data)}:{});
-  const body=await res.json();if(!res.ok)throw Error(body.error||'Серверийн алдаа');state=body;render();
+  const body=await res.json();if(!res.ok){const error=new Error(body.error||'Серверийн алдаа');error.status=res.status;throw error}state=body;render();
   $('sync').textContent='Сүүлийн шинэчлэлт: '+new Date().toLocaleTimeString('mn-MN');
   if(data){historyEntry(data);message(data.action==='SEARCH'?(body.colors.found?'Олдсон элементийн дугаар: '+body.colors.found:'Тохирох RGB утга олдсонгүй.'):'Амжилттай: '+describe(data))}
- }catch(e){const errorText=e.message==='Хүсэлт зөвшөөрөгдсөнгүй'?e.message+' Сервер дахин ассан эсвэл session token хүчингүй болсон байж болно. Хуудсыг дахин ачаална уу (Ctrl+R).':e.message;if(data)historyEntry(data,errorText);message(errorText,true);$('sync').textContent='Шинэчлэхэд алдаа гарлаа. Сервер болон модуль ачаалагдсан эсэхийг шалгана уу.'}
+ }catch(e){const errorText=(e.status===403||e.message==='Хүсэлт зөвшөөрөгдсөнгүй')?e.message+' Сервер дахин ассан эсвэл session token хүчингүй болсон байж болно. Хуудсыг дахин ачаална уу (Ctrl+R).':e.message;if(data)historyEntry(data,errorText);message(errorText,true);$('sync').textContent='Шинэчлэхэд алдаа гарлаа. Сервер болон модуль ачаалагдсан эсэхийг шалгана уу.'}
  finally{busy=false;controls.forEach(id=>$(id).disabled=false);$('generate').disabled=!!state&&state.mode.startsWith('БОДИТ')}
 }
 const NS='http://www.w3.org/2000/svg';function el(tag,attrs,text){const e=document.createElementNS(NS,tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e}
