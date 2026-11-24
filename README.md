@@ -1,6 +1,6 @@
 # Kernel data structure — II-4-4
 
-**F.CSM302 · Бие даалт 1**
+**F.CSM302 · Бие даалт 2 (Final release `v2.0-final`)**
 
 Бодит Linux kernel-ийн circular doubly linked list болон түүнийг `/proc`-оор уншдаг interactive graph.
 
@@ -76,7 +76,7 @@ sudo insmod src/kernel/collatz.ko start=27
 - О.Амина: B241910800
 - М.Наранбат: B242270801
   
-Код, UI, тест, баримт бичгийг ChatGPT/Codex-ийн тусламжтай боловсруулсан.
+Код, UI, тест, баримт бичгийг ChatGPT/Codex-ийн тусламжтай боловсруулсан. Бие даалт 2-ын (шүүмжийн засвар, дахин туршилт, Final Report, Manual, Poster) ажлыг Claude (Anthropic)-ийн тусламжтай боловсруулж, баг хянан баталгаажуулсан.
 
 ## Эх сурвалж
 
@@ -96,3 +96,22 @@ make run          # make demo-той ижил
 ```
 
 Вэбийн товчнууд RGB эсвэл Коллатцын эхлэх утгыг бэлдэнэ. Дараа нь үйлдлийн товчийг дарна. Граф дээр өнгийн элементийг сонгоход RGB болон устгах дугаар бөглөгдөнө.
+
+## Бие даалт 2: шүүмжийн дагуу сайжруулалт
+
+Албан ёсны peer review (4-2-11 → II-4-4)-ийн 5 шүүмжийг [Final Report](docs/II-4-4_Final_Report.pdf)-д хариулсан. Гол өөрчлөлт: Part II дээр Part I удирдлага нуух, 403 үед «Ctrl+R» санамж, граф 1–8 баганаар өргөнд зохицох ба төвлөрөх, скриншотуудыг одоогийн UI-аас дахин авсан.
+
+| Part I: add + search | Part II: Collatz 27 (112 node) |
+|---|---|
+| ![](docs/screenshots/final-2-part1-add-search.png) | ![](docs/screenshots/final-4-part2-collatz27.png) |
+
+Шинэ тест (`make test` = 27 Python + C; `make test-ui`; `make test-browser`):
+
+```bash
+make test           # tests/test_review_regression.py орно
+make test-ui
+CHROME_PATH=/usr/bin/chromium make test-browser   # npm i playwright-core шаардана
+make evidence       # Ubuntu VM: бодит kernel нотолгоо -> docs/evidence/live/
+```
+
+Screenshot-ууд бүгд practice горимынх (UI-ийн толгойн badge-д харагдана). Бодит kernel нотолгоо (Ubuntu VM) тусад нь `docs/evidence/live/`-д орно.

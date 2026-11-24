@@ -33,3 +33,9 @@ doctor-live:
 .PHONY: test-ui
 test-ui:
 	node tests/ui_smoke.cjs
+
+.PHONY: test-browser evidence
+test-browser:
+	CHROME_PATH=$${CHROME_PATH:-/usr/bin/chromium} node tests/ui_layout_check.mjs
+evidence:
+	bash tools/collect_kernel_evidence.sh
